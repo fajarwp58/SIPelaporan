@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2020 at 11:37 AM
+-- Generation Time: May 18, 2020 at 03:32 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -56,7 +56,8 @@ INSERT INTO `detail_laporan` (`detail_laporan_id`, `laporan_id`, `jenis_id`, `na
 (11, 10, 13, 'Agita Diana Putri', 'KTP', '2020-04-08 09:18:22', '2020-04-08 09:18:22'),
 (12, 11, 14, 'Fadilah Rahma Putri', 'KTM Mahasiswa', '2020-04-08 09:23:39', '2020-04-08 09:23:39'),
 (13, 12, 13, 'Dio Oktafiani', 'KTP', '2020-04-08 09:28:45', '2020-04-08 09:28:45'),
-(14, 12, 14, 'Dio Oktafiani', 'Kartu Pegadaian', '2020-04-08 09:28:45', '2020-04-08 09:28:45');
+(14, 12, 14, 'Dio Oktafiani', 'Kartu Pegadaian', '2020-04-08 09:28:45', '2020-04-08 09:28:45'),
+(23, 35, 7, 'dasdsa', 'sdsaddas', '2020-05-18 13:21:13', '2020-05-18 13:21:13');
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,8 @@ INSERT INTO `doc_pendukung` (`doc_pendukung_id`, `laporan_id`, `doc_pendukung_fi
 (9, 9, 'Gambar Mewarnai Ikan Paus.JPG', '2020-04-08 09:15:37', NULL),
 (10, 10, 'Gambar Mewarnai Ikan Paus.JPG', '2020-04-08 09:18:22', NULL),
 (11, 11, 'ktp.jpg', '2020-04-08 09:23:39', NULL),
-(12, 12, 'Gambar Mewarnai Ikan Paus.JPG', '2020-04-08 09:28:45', NULL);
+(12, 12, 'Gambar Mewarnai Ikan Paus.JPG', '2020-04-08 09:28:45', NULL),
+(21, 35, 'ktp.jpg', '2020-05-18 13:21:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -128,7 +130,6 @@ INSERT INTO `jenis` (`jenis_id`, `jenis_nama`, `created_at`, `updated_at`) VALUE
 
 CREATE TABLE `laporan` (
   `id` int(11) NOT NULL,
-  `user_nrp` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `pelapor_nik` varchar(30) NOT NULL,
   `laporan_no` varchar(50) NOT NULL,
   `laporan_tgllapor` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -143,19 +144,39 @@ CREATE TABLE `laporan` (
 -- Dumping data for table `laporan`
 --
 
-INSERT INTO `laporan` (`id`, `user_nrp`, `pelapor_nik`, `laporan_no`, `laporan_tgllapor`, `laporan_tglhilang`, `laporan_lokasi`, `laporan_keterangan`, `created_at`, `updated_at`) VALUES
-(1, '1611521021', '1371095658172123', 'LP/014/I/2019', '2019-01-06 08:06:05', '2018-12-19 17:00:00', 'Unand', 'Hilang', '2020-04-08 08:06:05', '2020-04-08 08:06:05'),
-(2, '1611521021', '1367827182182781', 'LP/015/I/2019', '2019-01-07 08:15:31', '2019-01-03 17:00:00', 'Kec. Pauh', 'Hilang', '2019-04-08 08:14:31', '2019-04-08 08:15:25'),
-(3, '1611521021', '1381726126127612', 'LP/016/I/2019', '2019-01-07 08:30:07', '2019-01-05 17:00:00', 'Pasar Baru', 'Hilang', '2019-04-08 08:30:07', '2019-04-08 08:30:07'),
-(4, '1611521021', '1371983264823732', 'LP/017/I/2019', '2019-01-08 08:41:24', '2019-01-06 17:00:00', 'Unand', 'Hilang', '2020-04-08 08:41:24', '2020-04-08 08:41:24'),
-(5, '1611521021', '1371829355366272', 'LP/018/I/2019', '2019-01-09 08:45:18', '2018-09-30 17:00:00', 'Belimbing', 'Hilang', '2020-04-08 08:45:18', '2020-04-08 08:45:18'),
-(6, '1611521021', '1471289821982232', 'LP/019/I/2019', '2019-01-09 08:51:17', '2019-01-31 17:00:00', 'Bank Nagari Pasar Raya', 'Hilang perjalanan dari rumah ke bank', '2020-04-08 08:51:17', '2020-04-08 08:51:17'),
-(7, '1611521021', '1318152636782898', 'LP/020/I/2019', '2019-01-09 08:59:41', '2018-12-11 17:00:00', 'Binuang', 'Hilang sekitar binuang', '2020-04-08 08:59:41', '2020-04-08 08:59:41'),
-(8, '1611521021', '1312766721671267', 'LP/021/I/2019', '2019-01-09 09:09:21', '2018-12-29 17:00:00', 'Pasar Baru', 'Hilang', '2020-04-08 09:09:21', '2020-04-08 09:09:21'),
-(9, '1611521021', '1371283738162676', 'LP/022/I/2019', '2019-01-09 09:15:37', '2019-01-07 17:00:00', 'SPH', 'Di sekitar rumah sakit', '2020-04-08 09:15:37', '2020-04-08 09:15:37'),
-(10, '1611521021', '1371047746366372', 'LP/023/I/2019', '2019-01-09 09:18:22', '2019-01-01 17:00:00', 'Kuranji', 'Hilang', '2020-04-08 09:18:22', '2020-04-08 09:18:22'),
-(11, '1611521021', '1371823553628999', 'LP/024/I/2019', '2019-01-09 09:23:39', '2018-10-31 17:00:00', 'Binuang Kp Dalam', 'Hilang', '2020-04-08 09:23:39', '2020-04-08 09:23:39'),
-(12, '1611521021', '1371289478367267', 'LP/025/I/2019', '2020-04-08 09:28:45', '2018-12-18 17:00:00', 'Limau Manis', 'Hilang', '2020-04-08 09:28:45', '2020-04-08 09:28:45');
+INSERT INTO `laporan` (`id`, `pelapor_nik`, `laporan_no`, `laporan_tgllapor`, `laporan_tglhilang`, `laporan_lokasi`, `laporan_keterangan`, `created_at`, `updated_at`) VALUES
+(1, '1371095658172123', 'LP/014/I/2019', '2019-01-06 08:06:05', '2018-12-19 17:00:00', 'Unand', 'Hilang', '2020-04-08 08:06:05', '2020-04-08 08:06:05'),
+(2, '1367827182182781', 'LP/015/I/2019', '2019-01-07 08:15:31', '2019-01-03 17:00:00', 'Kec. Pauh', 'Hilang', '2019-04-08 08:14:31', '2019-04-08 08:15:25'),
+(3, '1381726126127612', 'LP/016/I/2019', '2019-01-07 08:30:07', '2019-01-05 17:00:00', 'Pasar Baru', 'Hilang', '2019-04-08 08:30:07', '2019-04-08 08:30:07'),
+(4, '1371983264823732', 'LP/017/I/2019', '2019-01-08 08:41:24', '2019-01-06 17:00:00', 'Unand', 'Hilang', '2020-04-08 08:41:24', '2020-04-08 08:41:24'),
+(5, '1371829355366272', 'LP/018/I/2019', '2019-01-09 08:45:18', '2018-09-30 17:00:00', 'Belimbing', 'Hilang', '2020-04-08 08:45:18', '2020-04-08 08:45:18'),
+(6, '1471289821982232', 'LP/019/I/2019', '2019-01-09 08:51:17', '2019-01-31 17:00:00', 'Bank Nagari Pasar Raya', 'Hilang perjalanan dari rumah ke bank', '2020-04-08 08:51:17', '2020-04-08 08:51:17'),
+(7, '1318152636782898', 'LP/020/I/2019', '2019-01-09 08:59:41', '2018-12-11 17:00:00', 'Binuang', 'Hilang sekitar binuang', '2020-04-08 08:59:41', '2020-04-08 08:59:41'),
+(8, '1312766721671267', 'LP/021/I/2019', '2019-01-09 09:09:21', '2018-12-29 17:00:00', 'Pasar Baru', 'Hilang', '2020-04-08 09:09:21', '2020-04-08 09:09:21'),
+(9, '1371283738162676', 'LP/022/I/2019', '2019-01-09 09:15:37', '2019-01-07 17:00:00', 'SPH', 'Di sekitar rumah sakit', '2020-04-08 09:15:37', '2020-04-08 09:15:37'),
+(10, '1371047746366372', 'LP/023/I/2019', '2019-01-09 09:18:22', '2019-01-01 17:00:00', 'Kuranji', 'Hilang', '2020-04-08 09:18:22', '2020-04-08 09:18:22'),
+(11, '1371823553628999', 'LP/024/I/2019', '2019-01-09 09:23:39', '2018-10-31 17:00:00', 'Binuang Kp Dalam', 'Hilang', '2020-04-08 09:23:39', '2020-04-08 09:23:39'),
+(12, '1371289478367267', 'LP/025/I/2019', '2019-01-09 09:28:45', '2018-12-18 17:00:00', 'Limau Manis', 'Hilang', '2020-04-08 09:28:45', '2020-04-08 09:28:45'),
+(35, '1312766721671267', 'LP/013/V/2020', '2020-05-18 13:21:13', '2020-05-19 17:00:00', 'reww', 'dsaads', '2020-05-18 13:21:13', '2020-05-18 13:26:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laporan_user`
+--
+
+CREATE TABLE `laporan_user` (
+  `laporan_id` int(11) NOT NULL,
+  `user_input_nrp` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_kepala_nrp` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `laporan_user`
+--
+
+INSERT INTO `laporan_user` (`laporan_id`, `user_input_nrp`, `user_kepala_nrp`) VALUES
+(35, '1611521021', '1711523001');
 
 -- --------------------------------------------------------
 
@@ -268,9 +289,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_nrp`, `user_nama`, `password`, `pangkat_id`, `role_id`, `created_at`, `updated_at`) VALUES
-('1611521001', 'PEBRI', '$2y$10$EK.upvxClEAkPrqlgQE5U.ohttZ/un2dpDiuY1LLEREfh7sN5hvHm', 'B111', 3, '2020-02-22 13:55:37', '2020-02-23 13:21:45'),
+('1611521001', 'PEBRI', '$2y$10$QEm9hJ0DhxQAxdCky.DtxOj0ZCw8NB3NV1wf0K3MXBmCOcHKPxBVG', 'B111', 3, '2020-02-22 13:55:37', '2020-02-23 13:21:45'),
 ('1611521021', 'IJAYA', '$2y$10$QEm9hJ0DhxQAxdCky.DtxOj0ZCw8NB3NV1wf0K3MXBmCOcHKPxBVG', 'BR11', 2, '2020-02-01 05:35:45', '2020-02-01 05:35:45'),
-('1711523001', 'RISKHAN.M', '$2y$10$JlT2mPruo21PbIfYxbIS1uZLMJ9wW7kjpcqSYPcBlEUDEMFRLfDFe', 'AJ12', 1, '2020-02-20 09:59:43', '2020-02-20 09:59:43');
+('1711523001', 'RISKHAN.M', '$2y$10$QEm9hJ0DhxQAxdCky.DtxOj0ZCw8NB3NV1wf0K3MXBmCOcHKPxBVG', 'AJ12', 1, '2020-02-20 09:59:43', '2020-02-20 09:59:43');
 
 --
 -- Indexes for dumped tables
@@ -302,8 +323,15 @@ ALTER TABLE `jenis`
 --
 ALTER TABLE `laporan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_nrp` (`user_nrp`),
   ADD KEY `pelapor_nik` (`pelapor_nik`);
+
+--
+-- Indexes for table `laporan_user`
+--
+ALTER TABLE `laporan_user`
+  ADD KEY `laporan_id` (`laporan_id`),
+  ADD KEY `user_input_nrp` (`user_input_nrp`,`user_kepala_nrp`) USING BTREE,
+  ADD KEY `lap_user_kepala` (`user_kepala_nrp`);
 
 --
 -- Indexes for table `pangkat`
@@ -339,25 +367,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail_laporan`
 --
 ALTER TABLE `detail_laporan`
-  MODIFY `detail_laporan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `detail_laporan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `doc_pendukung`
 --
 ALTER TABLE `doc_pendukung`
-  MODIFY `doc_pendukung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `doc_pendukung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `jenis`
 --
 ALTER TABLE `jenis`
-  MODIFY `jenis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `jenis_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -386,8 +414,15 @@ ALTER TABLE `doc_pendukung`
 -- Constraints for table `laporan`
 --
 ALTER TABLE `laporan`
-  ADD CONSTRAINT `laporan_ibfk_1` FOREIGN KEY (`user_nrp`) REFERENCES `user` (`user_nrp`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `laporan_ibfk_2` FOREIGN KEY (`pelapor_nik`) REFERENCES `pelapor` (`pelapor_nik`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `laporan_user`
+--
+ALTER TABLE `laporan_user`
+  ADD CONSTRAINT `lap_user_input` FOREIGN KEY (`user_input_nrp`) REFERENCES `user` (`user_nrp`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `lap_user_kepala` FOREIGN KEY (`user_kepala_nrp`) REFERENCES `user` (`user_nrp`),
+  ADD CONSTRAINT `lap_user_laporan` FOREIGN KEY (`laporan_id`) REFERENCES `laporan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`

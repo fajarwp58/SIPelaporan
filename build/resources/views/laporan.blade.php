@@ -226,8 +226,10 @@
                             <td>
                                 Padang, {{ $tgllapor }} <br><br>
                                 <b>a.n. KEPALA RESOR SEKTOR PAUH</b> <br>
-                                <b>BA SPK “B”</b>
-                                <br><br><br><br><br>
+                                <b>BA SPK “B”</b><br>
+
+                                <img src="{{ asset('signature/signature.jpg') }}"  width="160" height="100"> <br>
+
                                 <b>{{ $detail3->user_nama }}</b> <br>
                                 <b>____________________</b><br>
                                 <b>{{ $detail3->pangkat_name }} NRP {{ $detail3->user_nrp }}</b>

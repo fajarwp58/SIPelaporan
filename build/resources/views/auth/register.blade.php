@@ -60,6 +60,9 @@
                                 <div class="col-md-6">
                                     <select class="form-control" required id="role_id" name="role_id">
                                         <option value="">Pilih Role</option>
+                                        <option value="1">Super Admin</option>
+                                        <option value="2">SPKT</option>
+                                        <option value="3">SABARA</option>
                                     </select>
                                 </div>
                             </div>
@@ -106,20 +109,6 @@
 @section('js')
 
     <script src="{{ url('assets/js/jquery.min.js') }}"> </script>
-
-    <script type="text/javascript">
-
-        $.ajax({
-            url: '{{ url('user/listrole') }}',
-            dataType: "json",
-            success: function(data) {
-                var role = jQuery.parseJSON(JSON.stringify(data));
-                $.each(role, function(k, v) {
-                    $('#role_id').append($('<option>', {value:v.role_id}).text(v.role_name))
-                })
-            }
-        });
-    </script>
 
     <script type="text/javascript">
 
