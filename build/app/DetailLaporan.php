@@ -18,7 +18,7 @@ class DetailLaporan extends Model
     }
 
     public function jenis(){
-        return $this->belongsTo('App\Jenis');
+        return $this->belongsTo('App\Jenis', 'jenis_id', 'jenis_id');
     }
 
 
