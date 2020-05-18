@@ -20,8 +20,8 @@ class DashboardController extends Controller
         $data = Laporan::all();
         $laporan = $data->count();
 
-        //Jumlah USer
-        $user = User::all()->count();
+        //Jumlah laporan hari ini
+        $totallaporanhariini = Laporan::whereDate('laporan_tgllapor', Carbon::today())->count();
 
         //Jumlah pelapor
         $pelapor = Pelapor::all()->count();
@@ -29,14 +29,15 @@ class DashboardController extends Controller
         //jumlah jenis laporan
         $jenis = Jenis::all()->count();
 
-        $tablelaporan = Laporan::whereDate('laporan_tgllapor', Carbon::today())->get();
+        //data logbook
+        $tablelaporan = Laporan::whereDate('laporan_tgllapor', Carbon::today())->orderByDesc('laporan_tgllapor')->get();
 
 
         return view('home',[
             'laporan'=>$laporan ,
             'pelapor'=>$pelapor ,
             'jenis'=>$jenis ,
-            'user'=>$user ,
+            'totallaporanhariini'=>$totallaporanhariini ,
             'now'=>$now,
             'tablelaporan'=>$tablelaporan
         ]);

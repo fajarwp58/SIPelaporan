@@ -20,7 +20,7 @@
                         </div>
                         <div class="m-l-15">
                             <h2 class="m-b-0">{{$laporan}}</h2>
-                            <p class="m-b-0 text-muted">Laporan</p>
+                            <p class="m-b-0 text-muted">Total Laporan Keseluruhan</p>
                         </div>
                     </div>
                 </div>
@@ -61,11 +61,11 @@
                 <div class="card-body">
                     <div class="media align-items-center">
                         <div class="avatar avatar-icon avatar-lg avatar-purple">
-                            <i class="anticon anticon-user"></i>
+                            <i class="anticon anticon-file-text"></i>
                         </div>
                         <div class="m-l-15">
-                            <h2 class="m-b-0">{{$user}}</h2>
-                            <p class="m-b-0 text-muted">User</p>
+                            <h2 class="m-b-0">{{$totallaporanhariini}}</h2>
+                            <p class="m-b-0 text-muted">Total Laporan Hari Ini</p>
                         </div>
                     </div>
                 </div>
