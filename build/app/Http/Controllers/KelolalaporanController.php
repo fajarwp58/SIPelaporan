@@ -16,6 +16,8 @@ use DateTime;
 use Yajra\DataTables\DataTables;
 use Excel;
 use App\Exports\LaporanExport;
+use App\LaporanUser;
+
 class KelolalaporanController extends Controller
 {
     public function addlaporan($id)
@@ -33,7 +35,8 @@ class KelolalaporanController extends Controller
             $surat = $AWAL .'/' .sprintf("%03s", $no). '/' . $bulanRomawi[date('n')] .'/' . date('Y');
         }
         $pelapor = Pelapor::where('pelapor_nik',$id)->first();
-        return view('addlaporan',['pelapor'=>$pelapor, 'surat'=>$surat]);
+        $user_kepala = User::where('role_id',1)->first();
+        return view('addlaporan',['pelapor'=>$pelapor, 'surat'=>$surat, 'user_kepala'=>$user_kepala]);
     }
 
     public function listjenis(){
@@ -59,12 +62,17 @@ class KelolalaporanController extends Controller
         $laporan->pelapor_nik = $request->pelapor_nik;
         $laporan->laporan_no = $request->laporan_no;
         $laporan->laporan_tgllapor = $waktu->toDateTimeString();
-        $laporan->user_nrp = $request->user_nrp;
         $laporan->pelapor_nik = $request->pelapor_nik;
         $laporan->laporan_tglhilang = $request->laporan_tglhilang;
         $laporan->laporan_lokasi = $request->laporan_lokasi;
         $laporan->laporan_keterangan = $request->laporan_keterangan;
         $laporan->save();
+
+        $laporanuser = new LaporanUser();
+        $laporanuser->laporan_id  = Laporan::all()->last()->id;
+        $laporanuser->user_input_nrp = $request->user_nrp;
+        $laporanuser->user_kepala_nrp = $request->user_kepala;
+        $laporanuser->save();
 
         //$input=$request->all();
         $images=array();

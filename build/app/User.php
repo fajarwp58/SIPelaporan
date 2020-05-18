@@ -30,7 +30,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    
+
     public $incrementing = false;
 
 
@@ -46,10 +46,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Pangkat', 'pangkat_id', 'pangkat_id');
     }
 
-    //User memiliki banyak laporan (berelasi)
-    public function laporan(){
-        return $this->hasMany('App\Laporan');
+    public function laporan()
+    {
+        return $this->belongsToMany('App\Laporan','laporan_user','user_nrp','id');
     }
+
 
     //untuk mencek apakah user memiliki role
     public function hasRole($roles)

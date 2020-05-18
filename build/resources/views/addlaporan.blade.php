@@ -87,6 +87,7 @@
 
                 <input type="text" class="form-control" id="pelapor_nik" name="pelapor_nik" value="{{$pelapor->pelapor_nik}}" hidden >
                 <input type="text" class="form-control" id="user_nrp" name="user_nrp" value="{{ Auth::user()->user_nrp }}" hidden>
+                <input type="text" class="form-control" id="user_kepala" name="user_kepala" value="{{ $user_kepala->user_nrp }}" hidden>
 
 
                 <div class="form-row">
