@@ -20,7 +20,22 @@
                         </div>
                         <div class="m-l-15">
                             <h2 class="m-b-0">{{$laporan}}</h2>
-                            <p class="m-b-0 text-muted">Total Laporan Keseluruhan</p>
+                            <p class="m-b-0 text-muted">Total Laporan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="avatar avatar-icon avatar-lg avatar-purple">
+                            <i class="anticon anticon-file-text"></i>
+                        </div>
+                        <div class="m-l-15">
+                            <h2 class="m-b-0">{{$totallaporanhariini}}</h2>
+                            <p class="m-b-0 text-muted">Laporan Hari Ini</p>
                         </div>
                     </div>
                 </div>
@@ -51,21 +66,6 @@
                         <div class="m-l-15">
                             <h2 class="m-b-0">{{$pelapor}}</h2>
                             <p class="m-b-0 text-muted">Pelapor</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="media align-items-center">
-                        <div class="avatar avatar-icon avatar-lg avatar-purple">
-                            <i class="anticon anticon-file-text"></i>
-                        </div>
-                        <div class="m-l-15">
-                            <h2 class="m-b-0">{{$totallaporanhariini}}</h2>
-                            <p class="m-b-0 text-muted">Total Laporan Hari Ini</p>
                         </div>
                     </div>
                 </div>
