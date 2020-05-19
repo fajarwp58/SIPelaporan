@@ -11,6 +11,7 @@
              <thead>
              <tr>
                  <th>No Laporan</th>
+                 <th>Nama SPKT</th>
                  <th>Nama Pelapor</th>
                  <th>Lokasi Hilang</th>
                  <th>Tanggal Lapor</th>
@@ -105,6 +106,7 @@
                  <thead>
                  <tr>
                      <th>No Laporan</th>
+                     <th>Nama SPKT</th>
                      <th>Nama Pelapor</th>
                      <th>Lokasi Hilang</th>
                      <th>Tanggal Lapor</th>
@@ -258,7 +260,8 @@
                     "ajax": "{{ url('/kelolalaporan/data') }}",
                     "columns": [
                         { "data": "laporan_no" },
-                        { "data": "pelapor.pelapor_nama"},
+                        { "data": "user_nama" },
+                        { "data": "pelapor_nama"},
                         { "data": "laporan_lokasi"},
                         { "data": "laporan_tgllapor"},
                         {
@@ -287,8 +290,12 @@
                             targets: [3]
                         },
                         {
-                            width: "50px",
+                            width: "250px",
                             targets: [4]
+                        },
+                        {
+                            width: "100px",
+                            targets: [5]
                         },
                     ],
                     scrollX: true,
@@ -301,10 +308,10 @@
                 var data = $('#tlaporan').DataTable().row($(this).parents('tr')).data();
                 $('#mdlaporan').modal('show');
                 $('#dlaporan_no').text(data.laporan_no);
-                $('#dpelapor_nama').text(data.pelapor.pelapor_nama);
+                $('#dpelapor_nama').text(data.pelapor_nama);
                 $('#dlaporan_lokasi').text(data.laporan_lokasi);
                 $('#dlaporan_keterangan').text(data.laporan_keterangan);
-                var images = data.doc_pendukung.doc_pendukung_file.split("|");
+                var images = data.doc_pendukung_file.split("|");
                 for (var i = 0, j = images.length; i < j; i++){
                     // $('#ddoc_pendukung_file').attr('src','DocumentLaporan/'+images[i]);
                     $('#image_preview').append("<img width='150px'  src='DocumentLaporan/"+images[i]+"'>");
@@ -334,7 +341,8 @@
                     "ajax": "{{ url('/kelolalaporan/data') }}",
                     "columns": [
                         { "data": "laporan_no" },
-                        { "data": "pelapor.pelapor_nama"},
+                        { "data": "user_nama" },
+                        { "data": "pelapor_nama"},
                         { "data": "laporan_lokasi"},
                         { "data": "laporan_tgllapor"},
                         {
@@ -365,8 +373,12 @@
                             targets: [3]
                         },
                         {
-                            width: "100px",
+                            width: "250px",
                             targets: [4]
+                        },
+                        {
+                            width: "100px",
+                            targets: [5]
                         },
                     ],
                     scrollX: true,
@@ -409,10 +421,10 @@
                 var data = $('#tlaporan').DataTable().row($(this).parents('tr')).data();
                 $('#mdlaporan').modal('show');
                 $('#dlaporan_no').text(data.laporan_no);
-                $('#dpelapor_nama').text(data.pelapor.pelapor_nama);
+                $('#dpelapor_nama').text(data.pelapor_nama);
                 $('#dlaporan_lokasi').text(data.laporan_lokasi);
                 $('#dlaporan_keterangan').text(data.laporan_keterangan);
-                var images = data.doc_pendukung.doc_pendukung_file.split("|");
+                var images = data.doc_pendukung_file.split("|");
                 for (var i = 0, j = images.length; i < j; i++){
                     // $('#ddoc_pendukung_file').attr('src','DocumentLaporan/'+images[i]);
                     $('#image_preview').append("<img width='150px'  src='DocumentLaporan/"+images[i]+"'>");

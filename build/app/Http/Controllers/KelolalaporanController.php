@@ -118,8 +118,12 @@ class KelolalaporanController extends Controller
 
     public function data()
     {
-        $detail_laporan = Laporan::with(['pelapor','doc_pendukung'])->get();
-
+        $detail_laporan = DB::table('laporan_user')
+        ->join('user','laporan_user.user_input_nrp','=','user.user_nrp')
+        ->join('laporan','laporan_user.laporan_id','=','laporan.id')
+        ->join('pelapor','laporan.pelapor_nik','=','pelapor.pelapor_nik')
+        ->join('doc_pendukung','laporan.id','=','doc_pendukung.laporan_id')
+        ->get();
         return DataTables::of($detail_laporan)->toJson();
     }
 
