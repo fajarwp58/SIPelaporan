@@ -8,18 +8,20 @@
     <div class="card-header">
         <div class="card-title">
             <div class="form-row">
-
-                <div class="form-group col-md-6">
+                <form id="formcari">
+                    {{ csrf_field() }}
+                <div class="form-group col-md-9">
                     <label> Masukkan Tanggal (Waktu Melaporkan):</label>
-
                         <div class="d-flex align-items-center">
                             <input type="text" class="form-control datepicker-input" id="mulai"  name="mulai" placeholder="Awal">
                             <span class="p-h-10">dan</span>
                             <input type="text" class="form-control datepicker-input" id="akhir" name="akhir" placeholder="Akhir">
                             <span class="p-h-10"></span>
-                            <button id="btncari" type="submit" class="btn btn-primary">Cari</button>
+                            <button id="btncari" type="submit" class="btn btn-primary">PDF</button>
                         </div>
-
+                        {{-- <br>
+                        <button id="btnpdf" type="submit" class="btn btn-primary">pdf</button> --}}
+                    </form>
                 </div>
 
             </div>
@@ -76,7 +78,7 @@
                     $('#tdownload').dataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'excel','pdf'
+
                         ],
 
                         ajax: {
@@ -137,6 +139,7 @@
                 }
 
 
+
             $('#btncari').click(function(){
                 var mulai = $('#mulai').val();
                 var akhir = $('#akhir').val();
@@ -144,6 +147,7 @@
                 {
                     $('#tdownload').DataTable().destroy();
                     loadData(mulai, akhir);
+                    $('#formcari').attr('action', '{{ url('downloadlaporan/pdf') }}');
                 }
                 else
                 {

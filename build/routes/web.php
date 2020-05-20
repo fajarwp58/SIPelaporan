@@ -98,6 +98,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin','spkt'
     Route::group(['prefix' => 'downloadlaporan'], function () {
         Route::get('/', 'DownloadLaporanController@view');
         Route::get('data', 'DownloadLaporanController@data');
+        Route::get('pdf', 'DownloadLaporanController@pdf');
 
     });
 
