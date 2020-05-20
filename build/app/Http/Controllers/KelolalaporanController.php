@@ -8,6 +8,8 @@ use App\Jenis;
 use App\Laporan;
 use App\User;
 use Carbon\Carbon;
+use Validator;
+use Redirect;
 use Illuminate\Http\Request;
 use App\Pelapor;
 use Illuminate\Support\Facades\DB;
@@ -55,64 +57,66 @@ class KelolalaporanController extends Controller
 
     public function create(Request $request){
 
-        $waktu = Carbon::now();
-//        $originalDate = $request->laporan_tglhilang;
+//        $validator = Validator::make($request->all(), [
+//            'doc_pendukung_file ' => 'mimes:jpeg,bmp,png|size:1024',
+//        ],
+//        [
+//            'doc_pendukung_file.size' => "ukuran file upload melewati batas maksomal  (max : 1mb) ",
+//            'doc_pendukung_file.mimes' => "file yang diupload harus tipe berjenis image "
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return redirect()->back()->withErrors($validator->errors());
+//        }
 
-        $laporan = new Laporan;
-        $laporan->pelapor_nik = $request->pelapor_nik;
-        $laporan->laporan_no = $request->laporan_no;
-        $laporan->laporan_tgllapor = $waktu->toDateTimeString();
-        $laporan->pelapor_nik = $request->pelapor_nik;
-        $laporan->laporan_tglhilang = $request->laporan_tglhilang;
-        $laporan->laporan_lokasi = $request->laporan_lokasi;
-        $laporan->laporan_keterangan = $request->laporan_keterangan;
-        $laporan->save();
+            $waktu = Carbon::now();
 
-        $laporanuser = new LaporanUser();
-        $laporanuser->laporan_id  = Laporan::all()->last()->id;
-        $laporanuser->user_input_nrp = $request->user_nrp;
-        $laporanuser->user_kepala_nrp = $request->user_kepala;
-        $laporanuser->save();
+            $laporan = new Laporan;
+            $laporan->pelapor_nik = $request->pelapor_nik;
+            $laporan->laporan_no = $request->laporan_no;
+            $laporan->laporan_tgllapor = $waktu->toDateTimeString();
+            $laporan->pelapor_nik = $request->pelapor_nik;
+            $laporan->laporan_tglhilang = $request->laporan_tglhilang;
+            $laporan->laporan_lokasi = $request->laporan_lokasi;
+            $laporan->laporan_keterangan = $request->laporan_keterangan;
+            $laporan->save();
 
-        //$input=$request->all();
-        $images=array();
-            if($files=$request->file('doc_pendukung_file')){
-            foreach($files as $file){
-                $nama_file=$file->getClientOriginalName();
-                $tujuan_upload = 'DocumentLaporan';
-                $file->move($tujuan_upload,$nama_file);
-                $images[]=$nama_file;
+            $laporanuser = new LaporanUser();
+            $laporanuser->laporan_id = Laporan::all()->last()->id;
+            $laporanuser->user_input_nrp = $request->user_nrp;
+            $laporanuser->user_kepala_nrp = $request->user_kepala;
+            $laporanuser->save();
+
+            //$input=$request->all();
+            $images = array();
+            if ($files = $request->file('doc_pendukung_file')) {
+                foreach ($files as $file) {
+                    $nama_file = $file->getClientOriginalName();
+                    $tujuan_upload = 'DocumentLaporan';
+                    $file->move($tujuan_upload, $nama_file);
+                    $images[] = $nama_file;
+                }
             }
-        }
 
-        // for ($u = 0; $u < count($request->file('doc_pendukung_file')); $u++) {
-        //     $docpendukung = new DocPendukung;
-        //     $docpendukung->laporan_id = Laporan::all()->last()->id;
-        //     $docpendukung->doc_pendukung_file = $images[$u];
+            DocPendukung::insert([
+                'laporan_id' => Laporan::all()->last()->id,
+                'doc_pendukung_file' => implode("|", $images),
+            ]);
 
-        //     $docpendukung->save();
-        DocPendukung::insert( [
-            'laporan_id'  => Laporan::all()->last()->id,
-            'doc_pendukung_file'=>  implode("|",$images),
-            //you can put other insertion here
-        ]);
 
-       // }
+            for ($i = 0; $i < count($request->jenis_id); $i++) {
+                $detaillaporan = new DetailLaporan;
+                $detaillaporan->laporan_id = Laporan::all()->last()->id;
+                $detaillaporan->jenis_id = $request->jenis_id[$i];
+                $detaillaporan->nama_pemilik = $request->nama_pemilik[$i];
+                $detaillaporan->detail_laporan_ket = $request->detail_laporan_ket[$i];
 
-        for ($i = 0; $i < count($request->jenis_id); $i++) {
-            $detaillaporan = new DetailLaporan;
-            $detaillaporan->laporan_id  = Laporan::all()->last()->id;
-            $detaillaporan->jenis_id = $request->jenis_id[$i];
-            $detaillaporan->nama_pemilik = $request->nama_pemilik[$i];
-            $detaillaporan->detail_laporan_ket = $request->detail_laporan_ket[$i];
+                $detaillaporan->save();
+            }
 
-            $detaillaporan->save();
-        }
-
-        $id = $request->laporan_no;
-        $select = Laporan::where('laporan_no',$id)->pluck('id');
-        return $this->print($select);
-
+            $id = $request->laporan_no;
+            $select = Laporan::where('laporan_no', $id)->pluck('id');
+            return $this->print($select);
 
     }
 

@@ -76,6 +76,8 @@
                 function loadData(mulai = '', akhir = '') {
 
                     $('#tdownload').dataTable({
+
+                        "searching": false,
                         dom: 'Bfrtip',
                         buttons: [
 

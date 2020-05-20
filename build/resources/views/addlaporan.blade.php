@@ -62,6 +62,16 @@
 
 @section('content')
 
+{{--    @if (count($errors) > 0)--}}
+{{--        <div class="alert alert-danger">--}}
+{{--            <ul>--}}
+{{--                @foreach ($errors->all() as $error)--}}
+{{--                    {{ $error }}--}}
+{{--                @endforeach--}}
+{{--            </ul>--}}
+{{--        </div>--}}
+{{--    @endif--}}
+
     <div class="card">
         <div class="card-header">
            <h4> Form Laporan Kehilangan</h4>
@@ -105,6 +115,7 @@
                     <div class="form-group col-md-6">
                         <label for="laproan_lokasi">Lokasi Kejadian</label>
                         <textarea type="text" class="form-control" id="laporan_lokasi" name="laporan_lokasi" placeholder="lokasi kejadian" required></textarea>
+                        <p style="color: deepskyblue">* file harus bertipe image dan ukuran <= 1mb</p>
                     </div>
 
                     <div class="form-group col-md-6">
@@ -112,13 +123,16 @@
                         <textarea type="text" class="form-control" id="laporan_keterangan" name="laporan_keterangan" placeholder="keterangan laporan" required></textarea>
                     </div>
 
+
                     <div class="form-group col-md-3">
-                        <input type="file" class="custom-file-input" id="doc_pendukung_file" name="doc_pendukung_file[]" multiple required>
+                        <input type="file" class="custom-file-input" id="doc_pendukung_file" name="doc_pendukung_file[]" onchange="validasi()" multiple required>
                         <label class="custom-file-label" for="doc_pendukung_file">Choose file</label>
                     </div>
 
                 </div>
+                <p style="color: red" id="pesan"> </p>
                 <br/>
+
                     <div id="image_preview"></div>
 
 
@@ -198,32 +212,82 @@
 
 @section('js')
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $("#doc_pendukung_file").change(function(){
+
+    function validasi() {
+
+        var fi = document.getElementById('doc_pendukung_file');
+        var image = ["jpeg","jpg","png","bmp"]
+
+        if (fi.files.length > 0) {
             $('#image_preview').html("");
-            var total_file=document.getElementById("doc_pendukung_file").files.length;
-            for(var i=0;i<total_file;i++)
-            {
-                $('#image_preview').append("<img width='150px'  src='"+URL.createObjectURL(event.target.files[i])+"'>");
+
+            for (var i = 0; i <= fi.files.length - 1; i++) {
+
+                var fsize = fi.files.item(i).size;
+                var nama  = fi.value;
+                var fileExtension = nama.replace(/^.*\./, '');
+
+                if (fsize > 1048576 ) {
+                    document.getElementById('pesan').style.display = "block"
+                    document.getElementById('pesan').innerHTML = '<b> ukuran file > 1 mb!'
+                    $('#doc_pendukung_file').val("")
+                }
+                else {
+                  var ekstensi = image.includes(fileExtension)
+
+                    if(ekstensi === true){
+                        document.getElementById('pesan').style.display = "none";
+                        $('#image_preview').append("<img width='150px'  src='" + URL.createObjectURL(event.target.files[i]) + "'>");
+                    }
+                     else{
+                        document.getElementById('pesan').style.display = "block"
+                        document.getElementById('pesan').innerHTML = '<b> Tipe data tidak sesuai syarat!'
+                        $('#doc_pendukung_file').val("")
+                    }
+
+                }
             }
-        });
+        }
+    }
 
         $.ajax({
             url: '{{ url('kelolalaporan/listjenis') }}',
             dataType: "json",
-            success: function(data) {
+            success: function (data) {
                 var jenis = jQuery.parseJSON(JSON.stringify(data));
-                $.each(jenis, function(k, v) {
-                    $('.jenis').append($('<option>', {value:v.jenis_id}).text(v.jenis_nama))
+                $.each(jenis, function (k, v) {
+                    $('.jenis').append($('<option>', {value: v.jenis_id}).text(v.jenis_nama))
                 })
             }
         });
 
-        $('#btnadd').click(function() {
+        $('#btnadd').click(function () {
             $('#clone').clone().appendTo('#back');
         });
 
-    </script>
+
+        // $("#formlaporan").validate({
+        //     errorElement: 'label',
+        //     errorClass: 'is-invalid',
+        //     validClass: 'is-valid',
+        //     rules: {
+        //         doc_pendukung_file: {
+        //             required: true,
+        //             extension: "png|jpeg|jpg",
+        //             filesize: 1048576,
+        //         }
+        //
+        //     },
+        //     messages: {
+        //         doc_pendukung_file: "File must be JPEG or PNG, less than 1MB"
+        //     },
+        // });
+
+
+
+
+</script>
 
 @endsection
