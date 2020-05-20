@@ -17,7 +17,7 @@
                             <span class="p-h-10">dan</span>
                             <input type="text" class="form-control datepicker-input" id="akhir" name="akhir" placeholder="Akhir">
                             <span class="p-h-10"></span>
-                            <button id="btncari" type="submit" class="btn btn-primary">PDF</button>
+                            <button id="btncari" type="submit" class="btn btn-primary">Download Laporan</button>
                         </div>
                         {{-- <br>
                         <button id="btnpdf" type="submit" class="btn btn-primary">pdf</button> --}}

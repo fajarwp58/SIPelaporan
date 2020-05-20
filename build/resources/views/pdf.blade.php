@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Laporan Bulanan</title>
+  <title></title>
   <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
   <style>
     @media print {
